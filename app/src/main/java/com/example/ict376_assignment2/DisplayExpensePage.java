@@ -7,18 +7,19 @@ import android.os.Bundle;
 
 public class DisplayExpensePage extends Activity {
 
-    DisplayExpensePage displayExpensePage;
+    AddExpensesFragment addExpensesFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_expense_page);
 
-        /*if (savedInstanceState == null) {
-            displayExpensePage = DisplayExpensePage.newInstance();
+        if (savedInstanceState == null) {
+            addExpensesFragment = AddExpensesFragment.newInstance();
 
-            getFragmentManager().beginTransaction().add(R.id.add_expense_fragment, AddExpensesFragment).commit();
+            getFragmentManager().beginTransaction().add(R.id.add_expense_fragment, addExpensesFragment).commit();
         }else{
-            displayExpensePage = (DisplayExpensePage)getFragmentManager().findFragmentById(R.id.add_expense_fragment);
-        }*/
+            addExpensesFragment = (AddExpensesFragment)getFragmentManager().findFragmentById(R.id.add_expense_fragment);
+        }
     }
 }

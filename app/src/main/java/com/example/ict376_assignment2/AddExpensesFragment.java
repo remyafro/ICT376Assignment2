@@ -37,12 +37,23 @@ public class AddExpensesFragment extends Fragment {
 
         AddExpensesFragment f = new AddExpensesFragment();
 
-        // Supply index input as an argument.
-        // Google recommends using bundles to pass in arguments
-        Bundle args = new Bundle();
-        //args.putInt("index", index);
-        f.setArguments(args);
-
         return f;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        if (container == null) {
+            return null;
+        }
+
+        mLayoutView = inflater.inflate(R.layout.activity_display_expense_page, null);
+        return mLayoutView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
     }
 }

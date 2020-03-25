@@ -49,7 +49,7 @@ public class MainPageFragment extends Fragment {
                 if (mDualPane) {
 
                     // display on the same Activity
-                    MainPageFragment details = MainPageFragment.newInstance();
+                    AddExpensesFragment details = AddExpensesFragment.newInstance();
 
                     // Execute a transaction, replacing any existing fragment
                     // with this one inside the frame.
