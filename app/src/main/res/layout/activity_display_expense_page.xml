@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DisplayExpensePage">
+
+    <TextView
+        android:id="@+id/textViewExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EXPENSES: "
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <EditText
+        android:id="@+id/editText_AddExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="290dp"
+        android:layout_below="@+id/textViewExpense"/>
+
+    <TextView
+        android:id="@+id/textViewExCat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CATEGORY: "
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="368dp"
+        android:layout_below="@+id/editText_AddExpense"/>
+
+    <Spinner
+        android:id="@+id/spinnerExCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="197dp"
+        tools:layout_editor_absoluteY="419dp"
+        android:layout_below="@+id/textViewExCat"/>
+
+    <Button
+        android:id="@+id/buttonSubmitExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT EXPENSE" />
+
+</LinearLayout>
