@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
             getFragmentManager().beginTransaction().add(R.id.mainpage_fragment, mainPageFragment).commit();
 
         }else{
-            mainPageFragment = (MainPageFragment)getFragmentManager().findFragmentById(R.id.add_expense_fragment);
+            mainPageFragment = (MainPageFragment)getFragmentManager().findFragmentById(R.id.mainpage_fragment);
         }
     }
 }

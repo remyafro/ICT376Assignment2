@@ -35,7 +35,7 @@ public class MainPageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // initialise what is displayed in the list
-        //refresh();
+        refresh();
 
         nNewExpenseButton = (Button) getActivity().findViewById(R.id.buttonAddExpense);
 
@@ -59,17 +59,20 @@ public class MainPageFragment extends Fragment {
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
 
-                }/*else {
-
-                    Bundle dataBundle = new Bundle();
-                    dataBundle.putInt("id", 0);
+                }else {
 
                     Intent intent = new Intent(getActivity().getApplicationContext(), DisplayExpensePage.class);
-                    intent.putExtras(dataBundle);   //
-
                     startActivity(intent);          //
-                }*/
+                }
             }
         });
     }
+
+    public void refresh(){
+        View detailsFrame = getActivity().findViewById(R.id.add_expense_fragment);
+        mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
+
+    }
+
+
 }

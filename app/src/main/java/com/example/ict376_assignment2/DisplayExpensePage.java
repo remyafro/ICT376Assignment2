@@ -12,7 +12,7 @@ public class DisplayExpensePage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_expense_page);
+        setContentView(R.layout.add_expense_layout);
 
         if (savedInstanceState == null) {
             addExpensesFragment = AddExpensesFragment.newInstance();
