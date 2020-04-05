@@ -24,6 +24,8 @@
         <activity android:name=".DisplayExpensePage" />
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".expense_list"></activity>
+        <activity android:name=".Camera"></activity>
+
 
     </application>
 

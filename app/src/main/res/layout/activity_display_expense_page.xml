@@ -87,6 +87,31 @@
         tools:layout_editor_absoluteX="99dp"
         tools:layout_editor_absoluteY="290dp"
         android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/textView_Receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Receipt: "
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="368dp"
+        android:layout_below="@+id/editText_desc"/>
+
+    <EditText
+        android:id="@+id/editText_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_Date"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="290dp"
+        android:layout_marginBottom="20dp"/>
+    <Button
+        android:id="@+id/button_capture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capture Reciept" />
+
 
     <Button
         android:id="@+id/buttonSubmitExpense"
@@ -96,7 +121,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="345dp">
+        android:layout_height="211dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
