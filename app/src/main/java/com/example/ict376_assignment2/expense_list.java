@@ -1,35 +1,21 @@
 package com.example.ict376_assignment2;
 
-import android.app.Activity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends Activity {
-
-    MainPageFragment mainPageFragment;
+public class expense_list extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.expense_list);
 
-
-        // By default Android will retain the fragment objects after rotation
-        if (savedInstanceState == null) {
-            mainPageFragment = MainPageFragment.newInstance();
-            getFragmentManager().beginTransaction().add(R.id.mainpage_fragment, mainPageFragment).commit();
-
-        }else{
-            mainPageFragment = (MainPageFragment)getFragmentManager().findFragmentById(R.id.mainpage_fragment);
-
-        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -41,16 +27,17 @@ public class MainActivity extends Activity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.nav_home:
-                         return true;
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
                     case R.id.nav_expense:
                         startActivity(new Intent(getApplicationContext()
                                 , DisplayExpensePage.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.nav_expenselist:
-                        startActivity(new Intent(getApplicationContext()
-                                , expense_list.class));
-                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;

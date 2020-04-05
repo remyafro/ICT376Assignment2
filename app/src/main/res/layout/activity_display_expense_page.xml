@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_color"
     tools:context=".DisplayExpensePage">
+
 
     <TextView
         android:id="@+id/textViewExpense"
@@ -91,5 +93,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SUBMIT EXPENSE" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="345dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomnavigation"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            app:itemBackground="?selectableItemBackgroundBorderless"
+            app:itemHorizontalTranslationEnabled="true"
+            app:itemIconTint="@drawable/nav_item_color_state"
+            app:itemTextColor="@drawable/nav_item_color_state"
+            app:menu="@menu/bottom_nav" />
+
+
+    </FrameLayout>
+
 
 </LinearLayout>
