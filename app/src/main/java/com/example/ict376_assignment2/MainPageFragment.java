@@ -9,11 +9,19 @@ import android.widget.Button;
 
 import android.app.FragmentTransaction;
 import android.app.Fragment;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainPageFragment extends Fragment {
+    private ExpenseDBHelper mydb;
+    ArrayList myArrayList;
+    private TextView totalExpense;
     boolean mDualPane;
     View    mLayoutView;
     Button nNewExpenseButton;
+    TextView totalex;
+    double sumEx;
 
     public static MainPageFragment newInstance() {
         MainPageFragment fragment = new MainPageFragment();
@@ -69,6 +77,18 @@ public class MainPageFragment extends Fragment {
     }
 
     public void refresh(){
+        if (mydb == null)
+            mydb = new ExpenseDBHelper(getActivity());
+        mydb = new ExpenseDBHelper(getActivity());
+
+        /*Intent intent = getActivity().getIntent();
+        Integer data = intent.getExtras().getInt("id");
+
+        sumEx = mydb.getAllExpense(data);
+
+        totalex = (TextView)getActivity().findViewById(R.id.textView_balance);
+        totalex.setText(String.valueOf(sumEx));*/
+
         View detailsFrame = getActivity().findViewById(R.id.add_expense_fragment);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 

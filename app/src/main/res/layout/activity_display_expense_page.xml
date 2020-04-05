@@ -23,7 +23,8 @@
         android:inputType="number"
         tools:layout_editor_absoluteX="99dp"
         tools:layout_editor_absoluteY="290dp"
-        android:layout_below="@+id/textViewExpense"/>
+        android:layout_below="@+id/textViewExpense"
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/textViewExCat"
@@ -31,16 +32,59 @@
         android:layout_height="wrap_content"
         android:text="CATEGORY: "
         tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="368dp"
+        tools:layout_editor_absoluteY="241dp"
         android:layout_below="@+id/editText_AddExpense"/>
 
-    <Spinner
-        android:id="@+id/spinnerExCategory"
+    <EditText
+        android:id="@+id/editText_ExpenseType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="419dp"
-        android:layout_below="@+id/textViewExCat"/>
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="290dp"
+        android:layout_below="@+id/textViewExCat"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/textView_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DATE (DD/MM/YYYY 29/01/2020): "
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="368dp"
+        android:layout_below="@+id/editText_ExpenseType"/>
+
+    <EditText
+        android:id="@+id/editText_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_desc"
+        android:ems="10"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="290dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/textView_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DESCRIPTION: "
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="368dp"
+        android:layout_below="@+id/editText_desc"/>
+
+    <EditText
+        android:id="@+id/editText_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_Date"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="290dp"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/buttonSubmitExpense"
