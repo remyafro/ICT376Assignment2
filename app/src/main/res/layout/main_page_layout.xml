@@ -67,7 +67,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="265dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="2">
 
@@ -93,11 +93,11 @@
                     android:id="@+id/buttonAddExpense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="ADD" />
 
             </LinearLayout>
@@ -106,14 +106,15 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-2dp"
             android:background="@color/colorPrimary"
             app:itemBackground="?selectableItemBackgroundBorderless"
             app:itemHorizontalTranslationEnabled="true"
-            app:menu="@menu/bottom_nav"
             app:itemIconTint="@drawable/nav_item_color_state"
-            app:itemTextColor="@drawable/nav_item_color_state"/>
+            app:itemTextColor="@drawable/nav_item_color_state"
+            app:menu="@menu/bottom_nav" />
 
     </RelativeLayout>
 </LinearLayout>
