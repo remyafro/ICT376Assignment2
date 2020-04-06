@@ -105,7 +105,8 @@ public class Camera extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
         }else {
-            dispatchTakePictureIntent();
+            //dispatchTakePictureIntent();
+            openCamera();
         }
 
     }
@@ -114,13 +115,18 @@ public class Camera extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == CAMERA_PERM_CODE){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                dispatchTakePictureIntent();
+                //dispatchTakePictureIntent();
+                openCamera();
             }else {
                 Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    private void openCamera(){
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera, CAMERA_REQUEST_CODE);
+    }
 
 
     @Override
@@ -179,7 +185,7 @@ public class Camera extends AppCompatActivity {
     }
 
 
-    private void dispatchTakePictureIntent() {
+    /*private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -199,6 +205,6 @@ public class Camera extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }*/
         }
-    }
-    }
+   // }
+   // }
 //}
