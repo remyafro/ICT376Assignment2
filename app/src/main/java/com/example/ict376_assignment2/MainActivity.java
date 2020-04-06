@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 
         }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
+        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,6 +55,6 @@ public class MainActivity extends Activity {
                 }
                 return false;
             }
-        });
+        });*/
     }
 }
