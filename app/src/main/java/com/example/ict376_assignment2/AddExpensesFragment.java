@@ -18,20 +18,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class AddExpensesFragment extends Fragment {
 
-    //private DBHelper mydb ;
+    public ExpenseDBHelper mydb;
 
     View mLayoutView;
-    TextView name ;
-    TextView phone;
-    TextView email;
-    TextView street;
-    TextView place;
+    Spinner category;
+    TextView amt;
+    TextView date;
+    TextView desc;
+    TextView receipt;
+
+    String amount;
     int id_To_Update = 0;
 
 
-    // the buttoms
+    // the buttons
     Button mSubmitExpense;
     Button button_capture;
 
@@ -50,6 +54,8 @@ public class AddExpensesFragment extends Fragment {
             return null;
         }
 
+        mydb = new ExpenseDBHelper(getActivity());
+
         mLayoutView = inflater.inflate(R.layout.activity_display_expense_page, null);
         String [] values = {"Personal", "Groceries", "Hobbies", "Essentials"};
         Spinner spinner = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
@@ -66,6 +72,12 @@ public class AddExpensesFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
+        category = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
+        amt = (TextView) mLayoutView.findViewById(R.id.editText_AddExpense);
+        date = (TextView) mLayoutView.findViewById(R.id.editText_date);
+        desc = (TextView) mLayoutView.findViewById(R.id.editText_desc);
+        receipt = (TextView) mLayoutView.findViewById(R.id.editText_receipt);
+
         button_capture = (Button) getActivity().findViewById(R.id.button_capture);
 
         button_capture.setOnClickListener(new View.OnClickListener() {
@@ -75,5 +87,28 @@ public class AddExpensesFragment extends Fragment {
 
             }
         });
+
+        mSubmitExpense = (Button)getActivity().findViewById(R.id.buttonSubmitExpense);
+
+        mSubmitExpense.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                amount = amt.getText().toString().trim();
+                double amtdb = Double.parseDouble(amount);
+
+                //String type, String desc, Double amount, String date
+                    if (mydb.addExpense(category.toString(), desc.getText().toString(), amtdb, date.getText().toString())){
+                    Toast.makeText(getActivity().getApplicationContext(), "New Expenses Added!", Toast.LENGTH_SHORT).show();
+                }
+                    else{
+
+                        Toast.makeText(getActivity().getApplicationContext(), "No Expenses Added!", Toast.LENGTH_SHORT).show();
+                    }
+            }
+
+        });
     }
+
+
+
+
 }

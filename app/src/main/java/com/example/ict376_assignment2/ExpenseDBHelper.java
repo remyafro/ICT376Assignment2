@@ -14,14 +14,14 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "expense.db";
 
-    public static final String USER_TABLE_NAME = "user";
+    /*public static final String USER_TABLE_NAME = "user";
     public static final String USER_COLUMN_ID = "id";
     public static final String USER_COLUMN_USERNAME = "username";
     public static final String USER_COLUMN_PASSWORD = "password";
 
     public static final String SESSION_TABLE_NAME = "session";
     public static final String SESSION_COLUMN_ID = "id";
-    public static final String SESSION_COLUMN_LOGIN = "login";
+    public static final String SESSION_COLUMN_LOGIN = "login";*/
 
     public static final String EXPENSE_TABLE_NAME = "expense";
     public static final String EXPENSE_COLUMN_ID = "id";
@@ -30,7 +30,8 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
     public static final String EXPENSE_COLUMN_AMOUNT = "amount";
     public static final String EXPENSE_COLUMN_DATE = "date";
     public static final String EXPENSE_COLUMN_RECEIPT = "receipt";
-    public static final String EXPENSE_COLUMN_USER_ID = "user_id";
+    //public static final String EXPENSE_COLUMN_USER_ID = "user_id";
+    //public static final String EXPENSE_COLUMN_FILEPATH = "filepath";
     static int ver = 1;
 
     public ExpenseDBHelper(Context context){
@@ -39,35 +40,36 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + SESSION_TABLE_NAME + "(" +
+        /*db.execSQL("CREATE TABLE " + SESSION_TABLE_NAME + "(" +
                 SESSION_COLUMN_ID + "INTEGER PRIMARY KEY, " + SESSION_COLUMN_LOGIN + " TEXT)");
 
         db.execSQL("CREATE TABLE " + USER_TABLE_NAME + "(" +
                 USER_COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT, " +
-                USER_COLUMN_USERNAME + " text, " + USER_COLUMN_PASSWORD + "text)");
+                USER_COLUMN_USERNAME + " text, " + USER_COLUMN_PASSWORD + "text)");*/
 
         db.execSQL(
                 "CREATE TABLE " + EXPENSE_TABLE_NAME + "(" +
-                        EXPENSE_COLUMN_ID + "INTEGER PRIMARY KEY, " +
-                        EXPENSE_COLUMN_TYPE + "TEXT, " +
-                        EXPENSE_COLUMN_DESCRIPTION + "TEXT, " +
-                        EXPENSE_COLUMN_AMOUNT + "INTEGER, " +
-                        EXPENSE_COLUMN_DATE + "TEXT, " +
-                        EXPENSE_COLUMN_RECEIPT + "BLOB " +
-                        EXPENSE_COLUMN_USER_ID + "INTEGER, FOREIGN KEY (" + EXPENSE_COLUMN_USER_ID + ") REFERENCES " +
-                        USER_TABLE_NAME + "(" + USER_COLUMN_ID + "))"
+                        EXPENSE_COLUMN_ID + " integer PRIMARY KEY, " +
+                        EXPENSE_COLUMN_TYPE + " text, " +
+                        EXPENSE_COLUMN_DESCRIPTION + " text, " +
+                        EXPENSE_COLUMN_AMOUNT + " integer, " +
+                        EXPENSE_COLUMN_DATE + " text, " +
+                        EXPENSE_COLUMN_RECEIPT + " blob " +
+                                                /*", FOREIGN KEY (" + EXPENSE_COLUMN_USER_ID + ") REFERENCES " +
+                        USER_TABLE_NAME + "(" + USER_COLUMN_ID + ")" +*/
+                        ")"
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + SESSION_TABLE_NAME);
+        //db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
+        //db.execSQL("DROP TABLE IF EXISTS " + SESSION_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + EXPENSE_TABLE_NAME);
         onCreate(db);
     }
 
-    public Boolean checkSession(String sessionValues) {
+    /*public Boolean checkSession(String sessionValues) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM session WHERE login = ?", new String[]{sessionValues});
         if (cursor.getCount() > 0) {
@@ -113,19 +115,22 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         } else {
             return false;
         }
-    }
+    }*/
 
     public double getAllExpense(Integer id){
         double personalSum = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         //String sumQuery = String.format("SELECT SUM(amount_donated) as Total FROM donations");
-        Cursor cursor = db.rawQuery("SELECT SUM(amount) as Total FROM expense where user_id = " + id + "", null);
+
+        //Cursor cursor = db.rawQuery("SELECT SUM(amount) as Total FROM expense where user_id = " + id + "", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(amount) as Total FROM expense", null);
         if (cursor.moveToFirst())
             personalSum = cursor.getDouble(cursor.getColumnIndex("Total"));
         return personalSum;
     }
 
-    public boolean addExpense(String type, String desc, Double amount, String date, Integer id){
+    public boolean addExpense(String type, String desc, Double amount, String date){
+        //public boolean addExpense(String type, String desc, Double amount, String date, Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues expenseTotal = new ContentValues();
@@ -133,17 +138,20 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         expenseTotal.put("description", desc);
         expenseTotal.put("amount", amount);
         expenseTotal.put("date", date);
-        expenseTotal.put("user_id", id);
+        //expenseTotal.put("filepath", filepath);
+
+        //expenseTotal.put("user_id", id);
+        //long id = db.insertWithOnConflict("expense", null, expenseTotal, SQLiteDatabase.CONFLICT_IGNORE);
         db.insert("expense", null, expenseTotal);
         return true;
     }
 
-    public ArrayList<Pair<Integer, String>> getAllExpenses(Integer id) {
+    public ArrayList<Pair<Integer, String>> getAllExpenses() {
         ArrayList<Pair<Integer, String>> array_list = new ArrayList<Pair<Integer, String>>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from expense where user_id = " + id + "", null);
-
+        //Cursor res = db.rawQuery("select * from expense where user_id = " + id + "", null);
+        Cursor res = db.rawQuery("select * from expense", null);
         if (res.getCount() > 0) {
             res.moveToFirst();
 

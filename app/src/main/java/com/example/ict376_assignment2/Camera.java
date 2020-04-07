@@ -44,7 +44,7 @@ public class Camera extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
     ImageView selectedImage;
-    Button cameraBtn,galleryBtn;
+    Button cameraBtn,galleryBtn,saveImage;
     String currentPhotoPath;
 
     @Override
@@ -99,6 +99,8 @@ public class Camera extends AppCompatActivity {
                 startActivityForResult(gallery, GALLERY_REQUEST_CODE);
             }
         });
+
+
 
     }
 
