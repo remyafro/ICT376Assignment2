@@ -11,8 +11,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,12 @@ public class AddExpensesFragment extends Fragment {
         }
 
         mLayoutView = inflater.inflate(R.layout.activity_display_expense_page, null);
+        String [] values = {"Personal", "Groceries", "Hobbies", "Essentials"};
+        Spinner spinner = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+
         return mLayoutView;
     }
 

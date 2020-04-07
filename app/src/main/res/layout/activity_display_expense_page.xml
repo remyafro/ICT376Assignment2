@@ -43,16 +43,13 @@
         tools:layout_editor_absoluteY="241dp"
         android:layout_below="@+id/editText_AddExpense"/>
 
-    <EditText
-        android:id="@+id/editText_ExpenseType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="290dp"
-        android:layout_below="@+id/textViewExCat"
-        android:layout_marginBottom="20dp"/>
+
+        <Spinner
+            android:id="@+id/catSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            tools:layout_editor_absoluteX="171dp"
+            tools:layout_editor_absoluteY="241dp" />
 
     <TextView
         android:id="@+id/textView_date"
