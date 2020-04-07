@@ -10,11 +10,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="514dp">
+        android:layout_height="251dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="370dp"
+            android:layout_height="200dp"
             android:background="@drawable/background_color">
 
             <TextView
@@ -31,13 +31,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewid"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="394dp"
+                android:layout_marginTop="-31dp"
                 android:text="Name"
                 android:textSize="25dp" />
 
             <LinearLayout
                 android:id="@+id/linearlayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="116dp"
                 android:layout_below="@+id/textViewName"
                 android:orientation="horizontal">
 
@@ -54,8 +56,8 @@
                     <ListView
                         android:id="@+id/listviewExpense"
                         android:layout_width="match_parent"
+                        android:layout_height="120dp"
                         android:background="@drawable/background_color"
-                        android:layout_height="300dp"
                         android:drawSelectorOnTop="false" />
 
                 </FrameLayout>
@@ -73,8 +75,8 @@
                     <ListView
                         android:id="@+id/listviewdate"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:background="@drawable/background_color"
-                        android:layout_height="300dp"
                         android:drawSelectorOnTop="false" />
 
                 </FrameLayout>
@@ -98,14 +100,6 @@
                 android:text="$"
                 android:textSize="15pt" />
 
-            <Button
-                android:id="@+id/button_DisplayDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewDetail"
-                android:layout_alignParentBottom="true"
-                android:text="Detail" />
-
 
         </RelativeLayout>
 
@@ -114,7 +108,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="160dp">
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -130,10 +124,18 @@
             app:menu="@menu/bottom_nav"
             tools:ignore="MissingConstraints" />
 
+        <Button
+            android:id="@+id/button_DisplayDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:text="Detail" />
+
 
     </FrameLayout>
 
-    </LinearLayout>
+</LinearLayout>
 
 
 
