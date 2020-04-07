@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ict376_assignment2">
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".DisplayExpenseList"></activity>
+        <activity android:name=".DisplayExpenseDetails" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +24,9 @@
         </activity>
         <activity android:name=".AddExpensesFragment" />
         <activity android:name=".DisplayExpensePage" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".expense_list"></activity>
-        <activity android:name=".Camera"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".expense_list" />
+        <activity android:name=".Camera" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -33,10 +35,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-
-
     </application>
 
 </manifest>
