@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -101,12 +102,14 @@ public class Camera extends AppCompatActivity {
 
     }
 
+
+
     private void askCameraPermissions() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
         }else {
             dispatchTakePictureIntent();
-            //openCamera();
+            openCamera();
         }
 
     }
@@ -123,10 +126,10 @@ public class Camera extends AppCompatActivity {
         }
     }
 
-    /*private void openCamera(){
+    private void openCamera(){
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, CAMERA_REQUEST_CODE);
-    }*/
+    }
 
 
     @Override
@@ -134,14 +137,17 @@ public class Camera extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
+                /*File f = new File(currentPhotoPath);
                 selectedImage.setImageURI(Uri.fromFile(f));
                 Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
 
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 Uri contentUri = Uri.fromFile(f);
                 mediaScanIntent.setData(contentUri);
-                this.sendBroadcast(mediaScanIntent);
+                this.sendBroadcast(mediaScanIntent);*/
+
+                Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+                selectedImage.setImageBitmap(bitmap);
             }
 
         }
@@ -207,5 +213,6 @@ public class Camera extends AppCompatActivity {
             }
         }
     }
+
     }
 //}

@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DisplayExpensePage extends Activity {
-    Button button_capture;
+
 
     AddExpensesFragment addExpensesFragment;
 
@@ -26,7 +26,7 @@ public class DisplayExpensePage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_expense_layout);
 
-        button_capture = (Button) findViewById(R.id.button_capture);
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -54,15 +54,6 @@ public class DisplayExpensePage extends Activity {
                 return false;
             }
         });
-
-        /*button_capture.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent camera_intent = new Intent(DisplayExpensePage.this, Camera.class);
-                startActivity(camera_intent);
-                finish();
-            }
-        });*/
-
 
         /*Spinner spinner = (Spinner)findViewById(R.id.spinnerExCategory);
 

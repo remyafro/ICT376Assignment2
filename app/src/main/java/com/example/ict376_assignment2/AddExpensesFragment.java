@@ -31,6 +31,7 @@ public class AddExpensesFragment extends Fragment {
 
     // the buttoms
     Button mSubmitExpense;
+    Button button_capture;
 
 
     public static AddExpensesFragment newInstance() {
@@ -51,9 +52,20 @@ public class AddExpensesFragment extends Fragment {
         return mLayoutView;
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+
+        button_capture = (Button) getActivity().findViewById(R.id.button_capture);
+
+        button_capture.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent camera_intent = new Intent(getActivity().getApplicationContext(), Camera.class);
+                startActivity(camera_intent);
+
+            }
+        });
     }
 }
