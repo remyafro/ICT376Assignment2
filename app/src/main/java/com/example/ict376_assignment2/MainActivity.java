@@ -25,36 +25,36 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             mainPageFragment = MainPageFragment.newInstance();
             getFragmentManager().beginTransaction().add(R.id.mainpage_fragment, mainPageFragment).commit();
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
+            bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                    switch (menuItem.getItemId()) {
+
+                        case R.id.nav_home:
+                            return true;
+                        case R.id.nav_expense:
+                            startActivity(new Intent(getApplicationContext()
+                                    , DisplayExpensePage.class));
+                            overridePendingTransition(0, 0);
+                            return true;
+                        case R.id.nav_expenselist:
+                            startActivity(new Intent(getApplicationContext()
+                                    , expense_list.class));
+                            overridePendingTransition(0, 0);
+                            return true;
+                    }
+                    return false;
+                }
+            });
         }else{
             mainPageFragment = (MainPageFragment)getFragmentManager().findFragmentById(R.id.mainpage_fragment);
 
         }
 
-        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                switch (menuItem.getItemId()) {
-
-                    case R.id.nav_home:
-                         return true;
-                    case R.id.nav_expense:
-                        startActivity(new Intent(getApplicationContext()
-                                , DisplayExpensePage.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.nav_expenselist:
-                        startActivity(new Intent(getApplicationContext()
-                                , expense_list.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                }
-                return false;
-            }
-        });*/
     }
 }
