@@ -33,8 +33,13 @@ public class AddExpensesFragment extends Fragment {
     TextView desc;
     TextView receipt;
 
-    String amount;
+    Spinner catSpinner;
+    double amtdb;
+    String expenseDate;
     String type;
+
+    String amount;
+    String expenseDesc;
     int id_To_Update = 0;
 
 
@@ -109,12 +114,26 @@ public class AddExpensesFragment extends Fragment {
         date = (TextView) mLayoutView.findViewById(R.id.editText_date);
         desc = (TextView) mLayoutView.findViewById(R.id.editText_desc);
         receipt = (TextView) mLayoutView.findViewById(R.id.editText_receipt);
+        catSpinner = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
+
+
 
         button_capture = (Button) getActivity().findViewById(R.id.button_capture);
 
         button_capture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                amount = amt.getText().toString().trim();
+                expenseDesc = desc.getText().toString();
+                amtdb = Double.parseDouble(amount);
+                type = catSpinner.getSelectedItem().toString();
+                expenseDate = date.getText().toString();
+
                 Intent camera_intent = new Intent(getActivity().getApplicationContext(), Camera.class);
+                camera_intent.putExtra("type",type);
+                camera_intent.putExtra("desc", expenseDesc);
+                camera_intent.putExtra("amt", amtdb);
+                camera_intent.putExtra("date", expenseDate);
+
                 startActivity(camera_intent);
 
             }
@@ -125,10 +144,14 @@ public class AddExpensesFragment extends Fragment {
         mSubmitExpense.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 amount = amt.getText().toString().trim();
-                double amtdb = Double.parseDouble(amount);
+                expenseDesc = desc.getText().toString();
+                amtdb = Double.parseDouble(amount);
+                type = catSpinner.getSelectedItem().toString();
+                expenseDate = date.getText().toString();
+
 
                 //String type, String desc, Double amount, String date
-                    if (mydb.addExpense(type, desc.getText().toString(), amtdb, date.getText().toString())){
+                    if (mydb.addExpense(type, expenseDesc, amtdb, expenseDate)){
                     Toast.makeText(getActivity().getApplicationContext(), "New Expenses Added!", Toast.LENGTH_SHORT).show();
                 }
                     else{

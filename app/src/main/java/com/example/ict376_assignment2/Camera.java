@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +33,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,8 +44,17 @@ public class Camera extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
     ImageView selectedImage;
-    Button cameraBtn,galleryBtn,saveImage;
+    Button cameraBtn, galleryBtn, saveImage;
     String currentPhotoPath;
+
+    public ExpenseDBHelper mydb;
+
+    double expenseAmount;
+    String expenseDesc;
+    String expenseType;
+    String expenseDate;
+
+    byte imageinbyte[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +72,12 @@ public class Camera extends AppCompatActivity {
 
                     case R.id.nav_home:
                         startActivity(new Intent(getApplicationContext()
-                                ,MainActivity.class));
+                                , MainActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.nav_expense:
                         startActivity(new Intent(getApplicationContext()
-                                ,Expense.class));
+                                , Expense.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.nav_expenselist:
@@ -81,11 +90,22 @@ public class Camera extends AppCompatActivity {
             }
         });
 
+        mydb = new ExpenseDBHelper(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            expenseAmount = extras.getDouble("amt");
+            expenseDesc = extras.getString("desc");
+            expenseType = extras.getString("type");
+            expenseDate = extras.getString("date");
+        }
+
         selectedImage = findViewById(R.id.displayImageView);
         cameraBtn = findViewById(R.id.cameraBtn);
         galleryBtn = findViewById(R.id.galleryBtn);
+        saveImage = findViewById(R.id.btnSave);
 
-       cameraBtn.setOnClickListener(new View.OnClickListener() {
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 askCameraPermissions();
@@ -101,15 +121,34 @@ public class Camera extends AppCompatActivity {
         });
 
 
+        saveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(expenseType);
+                System.out.println(expenseDesc);
+                System.out.println(expenseAmount);
+                System.out.println(expenseDate);
+                System.out.println(imageinbyte);
+
+                if (mydb.addExpensePhoto(expenseType, expenseDesc, expenseAmount, expenseDate, imageinbyte)) {
+                    Toast.makeText(getApplicationContext(), "New Expenses Added!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Expenses Added!", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
 
     }
 
 
-
     private void askCameraPermissions() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }else {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
             dispatchTakePictureIntent();
             openCamera();
         }
@@ -118,17 +157,17 @@ public class Camera extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == CAMERA_PERM_CODE){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == CAMERA_PERM_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
                 //openCamera();
-            }else {
+            } else {
                 Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void openCamera(){
+    private void openCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, CAMERA_REQUEST_CODE);
     }
@@ -148,7 +187,10 @@ public class Camera extends AppCompatActivity {
                 mediaScanIntent.setData(contentUri);
                 this.sendBroadcast(mediaScanIntent);*/
 
-                Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                imageinbyte = stream.toByteArray();
                 selectedImage.setImageBitmap(bitmap);
             }
 
@@ -180,7 +222,7 @@ public class Camera extends AppCompatActivity {
         // Create an image file name
         @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-       File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -205,7 +247,7 @@ public class Camera extends AppCompatActivity {
             } catch (IOException ex) {
 
             }
-           // Continue only if the File was successfully created
+            // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
@@ -216,5 +258,5 @@ public class Camera extends AppCompatActivity {
         }
     }
 
-    }
+}
 //}
