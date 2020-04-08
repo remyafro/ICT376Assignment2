@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -27,13 +28,13 @@ public class AddExpensesFragment extends Fragment {
     public ExpenseDBHelper mydb;
 
     View mLayoutView;
-    Spinner category;
     TextView amt;
     TextView date;
     TextView desc;
     TextView receipt;
 
     String amount;
+    String type;
     int id_To_Update = 0;
 
 
@@ -59,11 +60,41 @@ public class AddExpensesFragment extends Fragment {
         mydb = new ExpenseDBHelper(getActivity());
 
         mLayoutView = inflater.inflate(R.layout.activity_display_expense_page, null);
+
         String [] values = {"Personal", "Groceries", "Hobbies", "Essentials"};
         Spinner spinner = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Toast.makeText(parent.getContext(), "Personal Expense Selected", Toast.LENGTH_SHORT).show();
+                        type = "Personal";
+                        break;
+                    case 1:
+                        Toast.makeText(parent.getContext(), "Groceries Expense Selected", Toast.LENGTH_SHORT).show();
+                        type = "Groceries";
+                        break;
+                    case 2:
+                        Toast.makeText(parent.getContext(), "Hobbies Expense Selected", Toast.LENGTH_SHORT).show();
+                        type = "Hobbies";
+                        break;
+                    case 3:
+                        Toast.makeText(parent.getContext(), "Essential Expense Selected", Toast.LENGTH_SHORT).show();
+                        type = "Essential";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return mLayoutView;
     }
@@ -74,7 +105,6 @@ public class AddExpensesFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        category = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
         amt = (TextView) mLayoutView.findViewById(R.id.editText_AddExpense);
         date = (TextView) mLayoutView.findViewById(R.id.editText_date);
         desc = (TextView) mLayoutView.findViewById(R.id.editText_desc);
@@ -98,7 +128,7 @@ public class AddExpensesFragment extends Fragment {
                 double amtdb = Double.parseDouble(amount);
 
                 //String type, String desc, Double amount, String date
-                    if (mydb.addExpense(category.toString(), desc.getText().toString(), amtdb, date.getText().toString())){
+                    if (mydb.addExpense(type, desc.getText().toString(), amtdb, date.getText().toString())){
                     Toast.makeText(getActivity().getApplicationContext(), "New Expenses Added!", Toast.LENGTH_SHORT).show();
                 }
                     else{
@@ -109,8 +139,4 @@ public class AddExpensesFragment extends Fragment {
 
         });
     }
-
-
-
-
 }

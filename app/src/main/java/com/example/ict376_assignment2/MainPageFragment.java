@@ -81,13 +81,11 @@ public class MainPageFragment extends Fragment {
             mydb = new ExpenseDBHelper(getActivity());
         mydb = new ExpenseDBHelper(getActivity());
 
-        /*Intent intent = getActivity().getIntent();
-        Integer data = intent.getExtras().getInt("id");
 
-        sumEx = mydb.getAllExpense(data);
+        sumEx = mydb.getAllExpense();
 
         totalex = (TextView)getActivity().findViewById(R.id.textView_balance);
-        totalex.setText(String.valueOf(sumEx));*/
+        totalex.setText(String.valueOf(sumEx));
 
         View detailsFrame = getActivity().findViewById(R.id.add_expense_fragment);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;

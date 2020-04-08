@@ -1,25 +1,23 @@
 package com.example.ict376_assignment2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class expense_list extends Activity {
+public class DisplayList extends Activity {
 
-    DisplayExpenseList displayExpenseList;
+    DisplayExpenseDetails displayExpenseDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.expense_list);
 
-
+        setContentView(R.layout.details_expense_list);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnavigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
@@ -30,9 +28,6 @@ public class expense_list extends Activity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.nav_home:
-                        startActivity(new Intent(getApplicationContext()
-                                ,MainActivity.class));
-                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.nav_expense:
                         startActivity(new Intent(getApplicationContext()
@@ -48,14 +43,18 @@ public class expense_list extends Activity {
                 return false;
             }
         });
+        Bundle extras = getIntent().getExtras();
+        int ix = -1;
+        if(extras !=null)
+            ix = extras.getInt("id");
 
         if (savedInstanceState == null) {
-            displayExpenseList = DisplayExpenseList.newInstance();
-            getFragmentManager().beginTransaction().add(R.id.expenseList_fragment, displayExpenseList).commit();
+            displayExpenseDetails = DisplayExpenseDetails.newInstance(ix);
 
+            getFragmentManager().beginTransaction().add(R.id.expenseDetails_fragment, displayExpenseDetails).commit();
         }else{
-            displayExpenseList = (DisplayExpenseList)getFragmentManager().findFragmentById(R.id.expenseList_fragment);
+            displayExpenseDetails = (DisplayExpenseDetails)getFragmentManager().findFragmentById(R.id.expenseDetails_fragment);
         }
 
-    }
-}
+
+    }}
