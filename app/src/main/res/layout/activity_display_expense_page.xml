@@ -104,25 +104,25 @@
         android:layout_height="wrap_content"
         android:text="SUBMIT EXPENSE" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="211dp">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomnavigation"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
-            app:itemBackground="?selectableItemBackgroundBorderless"
-            app:itemHorizontalTranslationEnabled="true"
-            app:itemIconTint="@drawable/nav_item_color_state"
-            app:itemTextColor="@drawable/nav_item_color_state"
-            app:menu="@menu/bottom_nav" />
+            android:layout_height="310dp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomnavigation"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
+                app:itemBackground="?selectableItemBackgroundBorderless"
+                app:itemHorizontalTranslationEnabled="true"
+                app:itemIconTint="@drawable/nav_item_color_state"
+                app:itemTextColor="@drawable/nav_item_color_state"
+                app:menu="@menu/bottom_nav" />
 
 
-    </FrameLayout>
+        </FrameLayout>
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
