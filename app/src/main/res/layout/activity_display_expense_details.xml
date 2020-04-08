@@ -88,6 +88,16 @@
                 android:layout_below="@+id/textview"
                 android:ems="10" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/imgReceipt"
+                android:layout_below="@+id/editText_Dates"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                tools:ignore="ContentDescription" />
+
             <Button
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"

@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        // By default Android will retain the fragment objects after rotation
         if (savedInstanceState == null) {
             mainPageFragment = MainPageFragment.newInstance();
             getFragmentManager().beginTransaction().add(R.id.mainpage_fragment, mainPageFragment).commit();

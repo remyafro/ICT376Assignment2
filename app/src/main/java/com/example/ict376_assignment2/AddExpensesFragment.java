@@ -31,7 +31,6 @@ public class AddExpensesFragment extends Fragment {
     TextView amt;
     TextView date;
     TextView desc;
-    TextView receipt;
 
     Spinner catSpinner;
     double amtdb;
@@ -113,7 +112,6 @@ public class AddExpensesFragment extends Fragment {
         amt = (TextView) mLayoutView.findViewById(R.id.editText_AddExpense);
         date = (TextView) mLayoutView.findViewById(R.id.editText_date);
         desc = (TextView) mLayoutView.findViewById(R.id.editText_desc);
-        receipt = (TextView) mLayoutView.findViewById(R.id.editText_receipt);
         catSpinner = (Spinner) mLayoutView.findViewById(R.id.catSpinner);
 
 

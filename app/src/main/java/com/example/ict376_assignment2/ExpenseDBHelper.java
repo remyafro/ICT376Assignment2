@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.util.Pair;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -73,17 +75,11 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         expenseTotal.put("description", desc);
         expenseTotal.put("amount", amount);
         expenseTotal.put("date", date);
-//        expenseTotal.put("receipt", image);
-        //expenseTotal.put("filepath", filepath);
-
-        //expenseTotal.put("user_id", id);
-        //long id = db.insertWithOnConflict("expense", null, expenseTotal, SQLiteDatabase.CONFLICT_IGNORE);
-        db.insert("expense", null, expenseTotal);
+      db.insert("expense", null, expenseTotal);
         return true;
     }
 
     public boolean addExpensePhoto(String type, String desc, Double amount, String date, byte[] image){
-        //public boolean addExpense(String type, String desc, Double amount, String date, Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues expenseTotal = new ContentValues();
@@ -92,11 +88,6 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         expenseTotal.put("amount", amount);
         expenseTotal.put("date", date);
         expenseTotal.put("receipt", image);
-//        expenseTotal.put("receipt", image);
-        //expenseTotal.put("filepath", filepath);
-
-        //expenseTotal.put("user_id", id);
-        //long id = db.insertWithOnConflict("expense", null, expenseTotal, SQLiteDatabase.CONFLICT_IGNORE);
         db.insert("expense", null, expenseTotal);
         return true;
     }
@@ -118,6 +109,5 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
-
 
 }

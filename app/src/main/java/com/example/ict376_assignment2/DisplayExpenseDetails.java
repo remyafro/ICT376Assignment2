@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +69,7 @@ public class DisplayExpenseDetails extends Fragment {
         description = (TextView) mLayoutView.findViewById(R.id.editText_description);
         date = (TextView) mLayoutView.findViewById(R.id.editText_Dates);
         category = (TextView) mLayoutView.findViewById(R.id.editText_category);
+        receipt = (ImageView) mLayoutView.findViewById(R.id.imgReceipt);
         mCloseButton = (Button)mLayoutView.findViewById(R.id.button_back);
 
         int Value = getShownIndex();
@@ -77,11 +80,16 @@ public class DisplayExpenseDetails extends Fragment {
             id_To_Update = Value;
             rs.moveToFirst();
 
+
             String amt   = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_AMOUNT));
             String desc  = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_DESCRIPTION));
             String dates  = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_DATE));
             String type = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_TYPE));
+            byte[] img = rs.getBlob(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_RECEIPT));
+            Bitmap bm = BitmapFactory.decodeByteArray(img, 0, img.length);
+            Bitmap resized = Bitmap.createScaledBitmap(bm, (int) (bm.getWidth() * 5), (int) (bm.getHeight() * 5), true);
 
+            receipt.setImageBitmap(resized);
 
             if (!rs.isClosed()) {
                 rs.close();

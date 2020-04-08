@@ -11,7 +11,10 @@ import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainPageFragment extends Fragment {
     private ExpenseDBHelper mydb;
@@ -42,7 +45,10 @@ public class MainPageFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        // initialise what is displayed in the list
+        String dates = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(new Date());
+        TextView date = (TextView) getActivity().findViewById(R.id.textView_Date);
+        date.setText(dates);
+
         refresh();
 
         nNewExpenseButton = (Button) getActivity().findViewById(R.id.buttonAddExpense);
