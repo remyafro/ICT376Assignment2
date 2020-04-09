@@ -86,10 +86,14 @@ public class DisplayExpenseDetails extends Fragment {
             String dates  = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_DATE));
             String type = rs.getString(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_TYPE));
             byte[] img = rs.getBlob(rs.getColumnIndex(ExpenseDBHelper.EXPENSE_COLUMN_RECEIPT));
-            Bitmap bm = BitmapFactory.decodeByteArray(img, 0, img.length);
-            Bitmap resized = Bitmap.createScaledBitmap(bm, (int) (bm.getWidth() * 5), (int) (bm.getHeight() * 5), true);
-
-            receipt.setImageBitmap(resized);
+            if (img != null){
+                Bitmap bm = BitmapFactory.decodeByteArray(img, 0 , img.length);
+                Bitmap resized = Bitmap.createScaledBitmap(bm, (int) (bm.getWidth() * 5), (int) (bm.getHeight() * 5), true);
+                receipt.setImageBitmap(resized);
+            }
+            else{
+                receipt.setImageResource(android.R.drawable.ic_menu_camera);
+            }
 
             if (!rs.isClosed()) {
                 rs.close();

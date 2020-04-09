@@ -1,17 +1,29 @@
 package com.example.ict376_assignment2;
 
 public class Expense {
+    private int expenseID;
     private String expenseType;
     private String expenseDesc;
-    private int expenseAmt;
+    private double expenseAmt;
     private String expenseDate;
-    //todo camera stuff
+    private byte[] expenseImg;
 
-    public Expense(String expenseType, String expenseDesc, int expenseAmt, String expenseDate){
+    public Expense(int expenseID, String expenseType, String expenseDesc, double expenseAmt, String expenseDate, byte[] expenseImg){
+        this.expenseID = expenseID;
         this.expenseType = expenseType;
         this.expenseDesc = expenseDesc;
         this.expenseAmt = expenseAmt;
         this.expenseDate = expenseDate;
+        this.expenseImg = expenseImg;
+    }
+
+    public Expense(int expenseID, String expenseType, String expenseDesc, double expenseAmt, String expenseDate){
+        this.expenseID = expenseID;
+        this.expenseType = expenseType;
+        this.expenseDesc = expenseDesc;
+        this.expenseAmt = expenseAmt;
+        this.expenseDate = expenseDate;
+        this.expenseImg = expenseImg;
     }
 
     public Expense(){}
@@ -24,9 +36,11 @@ public class Expense {
         return expenseDate;
     }
 
-    public int getExpenseAmt() {
+    public double getExpenseAmt() {
         return expenseAmt;
     }
+
+    public byte[] getExpenseImg() {return expenseImg;}
 
     public String getExpenseDesc() {
         return expenseDesc;

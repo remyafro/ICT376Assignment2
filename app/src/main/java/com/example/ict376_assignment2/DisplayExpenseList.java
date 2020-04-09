@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DisplayExpenseList extends Fragment {
 
@@ -24,6 +25,7 @@ public class DisplayExpenseList extends Fragment {
     View mLayoutView;
     Button mNewContactButton;
     private ListView listView;
+    private ExpenseAdapter eAdapter;
 
     // Database
     ExpenseDBHelper mydb;
@@ -55,8 +57,10 @@ public class DisplayExpenseList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 
-                Pair<Integer, String> p = (Pair<Integer, String>) mArrayList.get(position);
+                ArrayList eArrayList = mydb.getExpensePair();
+                Pair<Integer, String> p = (Pair<Integer, String>) eArrayList.get(position);
                 int id_To_Search = p.first; // position + 1;
+                System.out.println(id_To_Search);
 
                 View detailsFrame = getActivity().findViewById(R.id.expenseDetails_fragment);
                 mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
@@ -78,6 +82,7 @@ public class DisplayExpenseList extends Fragment {
                     Bundle dataBundle = new Bundle();
 
                     dataBundle.putInt("id", id_To_Search);
+                    System.out.println("here");
                     Intent intent = new Intent(getActivity().getApplicationContext(), DisplayList.class);
                     intent.putExtras(dataBundle);
                     startActivity(intent);
@@ -101,18 +106,11 @@ public class DisplayExpenseList extends Fragment {
         // Get all the contacts from the database
         mArrayList = mydb.getAllExpenses();
 
-        ArrayList<String> array_list = new  ArrayList<String>();
-
-        for (int i=0; i<mArrayList.size(); i++){
-            Pair<Integer, String> p = (Pair<Integer, String>)mArrayList.get(i);
-            array_list.add(p.second);
-        }
-        // Put all the contacts in an array
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, array_list);
-
         // Display the contacts in the ListView object
         listView = (ListView)mLayoutView.findViewById(R.id.listviewExpense);
-        listView.setAdapter(arrayAdapter);
+        eAdapter = new ExpenseAdapter(getActivity(),mArrayList);
+        listView.setAdapter(eAdapter);
+//        listView.setAdapter(arrayAdapter);
 
         if (mydb == null)
             mydb = new ExpenseDBHelper(getActivity());

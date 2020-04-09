@@ -92,7 +92,32 @@ public class ExpenseDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public ArrayList<Pair<Integer, String>> getAllExpenses() {
+    public ArrayList<Expense> getAllExpenses() {
+        ArrayList<Expense> array_list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Cursor res = db.rawQuery("select * from expense where user_id = " + id + "", null);
+        Cursor res = db.rawQuery("select * from expense", null);
+        if (res.getCount() > 0) {
+            res.moveToFirst();
+
+            while (res.isAfterLast() == false) {
+                int id = res.getInt(res.getColumnIndex(EXPENSE_COLUMN_ID));
+                String expenseType = res.getString(res.getColumnIndex(EXPENSE_COLUMN_TYPE));
+                String expenseDesc = res.getString(res.getColumnIndex(EXPENSE_COLUMN_DESCRIPTION));
+                double expenseAmt = res.getDouble(res.getColumnIndex(EXPENSE_COLUMN_AMOUNT));
+                String expenseDate = res.getString(res.getColumnIndex(EXPENSE_COLUMN_DATE));
+                byte[] expenseImg = res.getBlob(res.getColumnIndex(EXPENSE_COLUMN_RECEIPT));
+
+                array_list.add(new Expense(id, expenseType, expenseDesc, expenseAmt, expenseDate, expenseImg));
+                res.moveToNext();
+            }
+
+        }
+        return array_list;
+    }
+
+    public ArrayList<Pair<Integer, String>> getExpensePair() {
         ArrayList<Pair<Integer, String>> array_list = new ArrayList<Pair<Integer, String>>();
 
         SQLiteDatabase db = this.getReadableDatabase();

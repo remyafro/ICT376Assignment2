@@ -12,66 +12,51 @@
         android:layout_width="match_parent"
         android:layout_height="514dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="370dp"
-            android:background="@drawable/background_color">
-
-
             <LinearLayout
                 android:id="@+id/linearlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
-
-                <FrameLayout
-                    android:id="@+id/donationdetails_fragment_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?android:attr/detailsElementBackground"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="8dp">
-
 
                     <ListView
                         android:id="@+id/listviewExpense"
                         android:layout_width="match_parent"
                         android:background="@drawable/background_color"
-                        android:layout_height="300dp"
+                        android:layout_height="500dp"
                         android:drawSelectorOnTop="false" />
 
-                </FrameLayout>
 
 
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linearlayout"
-                android:layout_marginTop="20dp"
-                android:text="Total Expenses ($):"
-                android:textSize="10pt" />
 
-            <TextView
-                android:id="@+id/textViewDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView7"
-                android:text="$"
-                android:textSize="15pt" />
 
-        </RelativeLayout>
 
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout"
+        android:layout_marginTop="20dp"
+        android:text="Total Expenses ($):"
+        android:textSize="10pt" />
+
+    <TextView
+        android:id="@+id/textViewDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView7"
+        android:text="$"
+        android:textSize="15pt" />
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="match_parent"
+        >
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
